@@ -1,7 +1,12 @@
 package com.tomildev.room_login_compose.features.auth.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import com.tomildev.room_login_compose.features.auth.data.local.entities.UserEntity
+
 @Dao
 interface UserDao {
 
+    @Insert
+    suspend fun insertUser(user: UserEntity)
 }
