@@ -23,10 +23,10 @@ fun TextFieldPrimary(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
+        isError = isError,
         label = {
             Text(
                 text = label,
-                color = MaterialTheme.colorScheme.onBackground
             )
         },
         modifier = modifier.fillMaxWidth(),
@@ -34,9 +34,12 @@ fun TextFieldPrimary(
         colors = OutlinedTextFieldDefaults.colors(
             focusedTextColor = MaterialTheme.colorScheme.onBackground,
             unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
-            focusedBorderColor = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onBackground,
-            unfocusedBorderColor = if (isError) MaterialTheme.colorScheme.error.copy(alpha = 2f) else MaterialTheme.colorScheme.outline,
+            focusedBorderColor = MaterialTheme.colorScheme.onBackground,
+            unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+            errorLabelColor = MaterialTheme.colorScheme.error,
             errorBorderColor = MaterialTheme.colorScheme.error,
+            errorCursorColor = MaterialTheme.colorScheme.error,
+            errorTextColor = MaterialTheme.colorScheme.error
         )
     )
     Spacer(Modifier.height(10.dp))
