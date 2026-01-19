@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.tomildev.room_login_compose.features.auth.presentation.login.LoginScreen
+import com.tomildev.room_login_compose.features.auth.presentation.register.RegisterScreen
 import com.tomildev.room_login_compose.ui.theme.Room_login_composeTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Room_login_composeTheme {
-                LoginScreen()
+//                LoginScreen()
+                RegisterScreen()
             }
         }
     }

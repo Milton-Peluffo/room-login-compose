@@ -1,4 +1,4 @@
-package com.tomildev.room_login_compose.features.auth.presentation.login
+package com.tomildev.room_login_compose.features.auth.presentation.register
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import com.tomildev.room_login_compose.features.auth.presentation.components.Aut
 import com.tomildev.room_login_compose.features.auth.presentation.components.ButtomPrimary
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     modifier: Modifier = Modifier,
 ) {
     Scaffold { innerPadding ->
@@ -31,8 +31,8 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AuthTitle(
-                title = "WELCOME BACK!",
-                subtitle = "Log in to continue"
+                title = "HEY THERE!",
+                subtitle = "Create your account"
             )
             TextFieldPrimary(
                 modifier = Modifier,
@@ -46,14 +46,20 @@ fun LoginScreen(
                 onValueChange = { "" },
                 label = "Password"
             )
+            TextFieldPrimary(
+                modifier = Modifier,
+                value = "",
+                onValueChange = { "" },
+                label = "Confirm password"
+            )
             Spacer(Modifier.height(20.dp))
             ButtomPrimary(
-                text = "Login",
+                text = "Sign up",
                 onClick = {}
             )
             Spacer(Modifier.height(20.dp))
             AuthTextAction(
-                text = "I forgot my password",
+                text = "I already have an account",
                 onClick = { }
             )
         }
