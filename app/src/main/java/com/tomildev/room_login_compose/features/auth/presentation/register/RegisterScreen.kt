@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.tomildev.room_login_compose.core.data.local.AppDatabase
+import com.tomildev.room_login_compose.features.auth.data.repository.AuthRepositoryImpl
 import com.tomildev.room_login_compose.features.auth.presentation.components.TextFieldPrimary
 import com.tomildev.room_login_compose.features.auth.presentation.components.AuthTextAction
 import com.tomildev.room_login_compose.features.auth.presentation.components.AuthTextError
@@ -23,8 +25,19 @@ import com.tomildev.room_login_compose.features.auth.presentation.components.But
 @Composable
 fun RegisterScreen(
     modifier: Modifier = Modifier,
-    registerViewmodel: RegisterViewmodel = viewModel()
 ) {
+
+    val context = androidx.compose.ui.platform.LocalContext.current
+
+    val registerViewmodel: RegisterViewmodel = viewModel(
+        factory = object : androidx.lifecycle.ViewModelProvider.Factory {
+            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
+                val db = AppDatabase.getDatabase(context)
+                val repository = AuthRepositoryImpl(db.userDao())
+                return RegisterViewmodel(repository) as T
+            }
+        }
+    )
 
     val uiState by registerViewmodel.uiState.collectAsStateWithLifecycle()
 
@@ -59,7 +72,7 @@ fun RegisterScreen(
             TextFieldPrimary(
                 modifier = Modifier,
                 value = uiState.confirmPassword,
-                onValueChange = { registerViewmodel.onConfirmPasswordChange(confirmPassword = it)},
+                onValueChange = { registerViewmodel.onConfirmPasswordChange(confirmPassword = it) },
                 label = "Confirm password",
                 isError = uiState.isPasswordConfirmError
             )
