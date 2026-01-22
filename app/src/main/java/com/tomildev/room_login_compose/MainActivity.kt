@@ -14,7 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.tomildev.room_login_compose.features.auth.presentation.login.LoginScreen
 import com.tomildev.room_login_compose.features.auth.presentation.register.RegisterScreen
 import com.tomildev.room_login_compose.ui.theme.Room_login_composeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

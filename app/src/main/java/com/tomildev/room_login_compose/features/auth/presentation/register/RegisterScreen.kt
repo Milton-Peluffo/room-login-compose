@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.tomildev.room_login_compose.core.data.local.AppDatabase
@@ -21,23 +22,13 @@ import com.tomildev.room_login_compose.features.auth.presentation.components.Aut
 import com.tomildev.room_login_compose.features.auth.presentation.components.AuthTextError
 import com.tomildev.room_login_compose.features.auth.presentation.components.AuthTitle
 import com.tomildev.room_login_compose.features.auth.presentation.components.ButtomPrimary
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
 fun RegisterScreen(
     modifier: Modifier = Modifier,
+    registerViewmodel: RegisterViewmodel = hiltViewModel()
 ) {
-
-    val context = androidx.compose.ui.platform.LocalContext.current
-
-    val registerViewmodel: RegisterViewmodel = viewModel(
-        factory = object : androidx.lifecycle.ViewModelProvider.Factory {
-            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
-                val db = AppDatabase.getDatabase(context)
-                val repository = AuthRepositoryImpl(db.userDao())
-                return RegisterViewmodel(repository) as T
-            }
-        }
-    )
 
     val uiState by registerViewmodel.uiState.collectAsStateWithLifecycle()
 
