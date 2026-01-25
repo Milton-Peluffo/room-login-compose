@@ -18,10 +18,12 @@ fun PrimaryTextField(
     onValueChange: (String) -> Unit,
     value: String,
     label: String,
-    isError: Boolean = false
+    isError: Boolean = false,
+    enabled: Boolean = true
 ) {
     OutlinedTextField(
         value = value,
+        enabled = enabled,
         onValueChange = onValueChange,
         isError = isError,
         label = {
@@ -42,5 +44,5 @@ fun PrimaryTextField(
             errorTextColor = MaterialTheme.colorScheme.error
         )
     )
-    Spacer(Modifier.height(10.dp))
+    Spacer(Modifier.height(5.dp))
 }

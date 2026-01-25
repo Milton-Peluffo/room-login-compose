@@ -8,7 +8,7 @@ import com.tomildev.room_login_compose.features.auth.data.local.entities.UserEnt
 
 @Database(
     entities = [UserEntity::class],
-    version = 1
+    version = 2
 )
 
 abstract class AppDatabase : RoomDatabase() {

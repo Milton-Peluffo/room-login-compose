@@ -18,6 +18,7 @@ import com.tomildev.room_login_compose.core.presentation.components.PrimaryButto
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryTextField
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryTitle
 import com.tomildev.room_login_compose.core.presentation.components.TextError
+import com.tomildev.room_login_compose.features.auth.presentation.components.AuthTextAction
 
 @Composable
 fun RegisterScreen(
@@ -40,6 +41,20 @@ fun RegisterScreen(
             PrimaryTitle(
                 title = "HEY THERE!",
                 subtitle = "Create your account"
+            )
+            PrimaryTextField(
+                modifier = Modifier,
+                value = uiState.name,
+                onValueChange = { registerViewmodel.onNameChange(name = it) },
+                label = "Name",
+                isError = uiState.isNameError
+            )
+            PrimaryTextField(
+                modifier = Modifier,
+                value = uiState.phone,
+                onValueChange = { registerViewmodel.onPhoneChange(phone = it) },
+                label = "Phone",
+                isError = uiState.isPhoneError
             )
             PrimaryTextField(
                 modifier = Modifier,
@@ -71,7 +86,7 @@ fun RegisterScreen(
                 onClick = { registerViewmodel.onRegisterClick() }
             )
             Spacer(Modifier.height(20.dp))
-            PrimaryButton(
+            AuthTextAction(
                 text = "I already have an account",
                 onClick = { }
             )

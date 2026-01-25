@@ -28,6 +28,27 @@ class RegisterViewmodel @Inject constructor(private val authRepository: AuthRepo
 
     private fun validateFields(): Boolean {
         return when {
+
+            !isNameLengthValid(name = _uiState.value.name) -> {
+                _uiState.update {
+                    it.copy(
+                        errorMessage = "Name must have 3 characters at least",
+                        isNameError = true
+                    )
+                }
+                false
+            }
+
+            !isPhoneLengthValid(phone = _uiState.value.phone) -> {
+                _uiState.update {
+                    it.copy(
+                        errorMessage = "Phone must have 10 characters",
+                        isPhoneError = true
+                    )
+                }
+                false
+            }
+
             !isEmailValid(email = _uiState.value.email) -> {
                 _uiState.update {
                     it.copy(
@@ -67,7 +88,34 @@ class RegisterViewmodel @Inject constructor(private val authRepository: AuthRepo
 
     fun registerUser() {
         viewModelScope.launch {
-            authRepository.registerUser(user = User(_uiState.value.email, _uiState.value.password))
+            authRepository.registerUser(
+                user = User(
+                    _uiState.value.name,
+                    _uiState.value.phone,
+                    _uiState.value.email,
+                    _uiState.value.password
+                )
+            )
+        }
+    }
+
+    fun onNameChange(name: String) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                name = name,
+                errorMessage = null,
+                isNameError = false
+            )
+        }
+    }
+
+    fun onPhoneChange(phone: String) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                phone = phone,
+                errorMessage = null,
+                isPhoneError = false
+            )
         }
     }
 
@@ -97,7 +145,6 @@ class RegisterViewmodel @Inject constructor(private val authRepository: AuthRepo
                 confirmPassword = confirmPassword,
                 errorMessage = null,
                 isPasswordConfirmError = false
-
             )
         }
     }
@@ -109,10 +156,14 @@ class RegisterViewmodel @Inject constructor(private val authRepository: AuthRepo
         password == confirmPassword
 
     private fun isPasswordLengthValid(password: String): Boolean = password.length >= 8
+    private fun isPhoneLengthValid(phone: String): Boolean = phone.length == 10
+    private fun isNameLengthValid(name: String): Boolean = name.length >= 3
 }
 
 data class RegisterUiState(
     //USER DATA
+    val name: String = "",
+    val phone: String = "",
     val email: String = "",
     val password: String = "",
     val confirmPassword: String = "",
@@ -121,6 +172,8 @@ data class RegisterUiState(
     val isRegistrationSuccess: Boolean = false,
     //ERRORS
     val errorMessage: String? = null,
+    val isNameError: Boolean = false,
+    val isPhoneError: Boolean = false,
     val isEmailError: Boolean = false,
     val isPasswordError: Boolean = false,
     val isPasswordConfirmError: Boolean = false,

@@ -16,7 +16,8 @@ import androidx.compose.ui.unit.sp
 fun PrimaryButton(
     modifier: Modifier = Modifier,
     text: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    enabled: Boolean = true
 ) {
 
     Button(
@@ -24,6 +25,7 @@ fun PrimaryButton(
             .fillMaxWidth()
             .height(45.dp),
         onClick = { onClick() },
+        enabled = enabled,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary

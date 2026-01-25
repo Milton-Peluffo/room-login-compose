@@ -11,6 +11,8 @@ class AuthRepositoryImpl @Inject constructor(private val userDao: UserDao) : Aut
     override suspend fun registerUser(user: User): Result<Unit> {
         return try {
             val entity = UserEntity(
+                name = user.name,
+                phone = user.phone,
                 email = user.email,
                 password = user.password
             )
