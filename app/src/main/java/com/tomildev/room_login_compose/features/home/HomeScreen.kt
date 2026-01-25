@@ -1,6 +1,5 @@
 package com.tomildev.room_login_compose.features.home
 
-import android.provider.ContactsContract
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,7 +24,8 @@ import java.util.Locale.getDefault
 @Composable
 fun HomeScreen(
     email: String,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    onNavigateToLogin: () -> Unit
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -88,7 +88,7 @@ fun HomeScreen(
                 onClick = { }
             )
             Spacer(Modifier.height(20.dp))
-            PrimaryIconButton(text = "Log out", onClick = {})
+            PrimaryIconButton(text = "Log out", onClick = { onNavigateToLogin() })
         }
     }
 }

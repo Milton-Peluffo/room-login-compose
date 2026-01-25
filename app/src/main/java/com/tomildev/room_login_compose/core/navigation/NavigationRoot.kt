@@ -20,9 +20,14 @@ fun NavigationRoot(
     ) {
 
         composable<NavRoute.Login> {
-            LoginScreen(onNavigateToRegister = {
-                navController.navigate(NavRoute.Register)
-            })
+            LoginScreen(
+                onNavigateToRegister = {
+                    navController.navigate(NavRoute.Register)
+                },
+                onNavigateToHome = { email ->
+                    navController.navigate(NavRoute.Home(email))
+                }
+            )
         }
 
         composable<NavRoute.Register> {
@@ -35,7 +40,9 @@ fun NavigationRoot(
 
         composable<NavRoute.Home> { backStackEntry ->
             val args = backStackEntry.toRoute<NavRoute.Home>()
-            HomeScreen(email = args.email)
+            HomeScreen(email = args.email, onNavigateToLogin = {
+                navController.navigate(NavRoute.Login)
+            })
         }
     }
 }

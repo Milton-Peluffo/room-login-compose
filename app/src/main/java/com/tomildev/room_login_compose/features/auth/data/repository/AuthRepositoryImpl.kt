@@ -41,5 +41,4 @@ class AuthRepositoryImpl @Inject constructor(private val userDao: UserDao) : Aut
             Result.failure(e)
         }
     }
-
 }

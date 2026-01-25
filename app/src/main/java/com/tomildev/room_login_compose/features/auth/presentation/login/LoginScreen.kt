@@ -8,20 +8,36 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tomildev.room_login_compose.features.auth.presentation.components.AuthTextAction
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryButton
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryIconButton
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryTextField
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryTitle
+import com.tomildev.room_login_compose.core.presentation.components.TextError
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    onNavigateToRegister: () -> Unit
+    loginViewModel: LoginViewModel = hiltViewModel(),
+    onNavigateToRegister: () -> Unit,
+    onNavigateToHome: (String) -> Unit
 ) {
+
+    val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(uiState.isLoginSuccess) {
+        if (uiState.isLoginSuccess) {
+            onNavigateToHome(uiState.email)
+        }
+    }
+
     Scaffold { innerPadding ->
 
         Column(
@@ -38,20 +54,23 @@ fun LoginScreen(
             )
             PrimaryTextField(
                 modifier = Modifier,
-                value = "",
-                onValueChange = { "" },
+                value = uiState.email,
+                onValueChange = { loginViewModel.onEmailChange(email = it) },
                 label = "Email"
             )
             PrimaryTextField(
                 modifier = Modifier,
-                value = "",
-                onValueChange = { "" },
+                value = uiState.password,
+                onValueChange = { loginViewModel.onPasswordChange(password = it) },
                 label = "Password"
             )
+            uiState.errorMessage?.let { error ->
+                TextError(text = error)
+            }
             Spacer(Modifier.height(20.dp))
             PrimaryButton(
                 text = "Login",
-                onClick = {}
+                onClick = { loginViewModel.onLoginClick() }
             )
             Spacer(Modifier.height(15.dp))
             PrimaryIconButton(
