@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.tomildev.room_login_compose.features.auth.domain.model.User
 import com.tomildev.room_login_compose.features.auth.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -88,6 +89,7 @@ class RegisterViewmodel @Inject constructor(private val authRepository: AuthRepo
 
     fun registerUser() {
         viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
             authRepository.registerUser(
                 user = User(
                     _uiState.value.name,
@@ -97,8 +99,10 @@ class RegisterViewmodel @Inject constructor(private val authRepository: AuthRepo
                 )
             )
             _uiState.update { currentState ->
+                delay(2500)
                 currentState.copy(isRegistrationSuccess = true)
             }
+            _uiState.update { it.copy(isLoading = true) }
         }
     }
 
@@ -173,6 +177,7 @@ data class RegisterUiState(
     //VALIDATORS
     val isRegistered: Boolean = false,
     val isRegistrationSuccess: Boolean = false,
+    val isLoading: Boolean = false,
     //ERRORS
     val errorMessage: String? = null,
     val isNameError: Boolean = false,

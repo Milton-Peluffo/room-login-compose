@@ -70,6 +70,7 @@ fun LoginScreen(
             Spacer(Modifier.height(20.dp))
             PrimaryButton(
                 text = "Login",
+                isLoading = uiState.isLoading,
                 onClick = { loginViewModel.onLoginClick() }
             )
             Spacer(Modifier.height(15.dp))

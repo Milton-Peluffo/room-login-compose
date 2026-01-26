@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tomildev.room_login_compose.features.auth.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -55,10 +56,12 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
     private fun userLogin() {
 
         viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
             val result = authRepository.getUserByEmail(_uiState.value.email)
 
             result.onSuccess { user ->
                 if (user != null && user.password == _uiState.value.password) {
+                    delay(2500)
                     _uiState.update { it.copy(isLoginSuccess = true) }
                 } else {
                     _uiState.update {
@@ -68,6 +71,7 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
             }.onFailure {
                 _uiState.update { it.copy(errorMessage = "An error occurred") }
             }
+            _uiState.update { it.copy(isLoading = false) }
         }
     }
 
@@ -103,6 +107,7 @@ data class LoginUiState(
     val email: String = "",
     val password: String = "",
     //VALIDATORS
+    val isLoading: Boolean = false,
     val isLoginSuccess: Boolean = false,
     //ERRORS
     val errorMessage: String? = null,

@@ -92,6 +92,7 @@ fun RegisterScreen(
             Spacer(Modifier.height(20.dp))
             PrimaryButton(
                 text = "Sign up",
+                isLoading = uiState.isLoading,
                 onClick = { registerViewmodel.onRegisterClick() }
             )
             Spacer(Modifier.height(20.dp))
