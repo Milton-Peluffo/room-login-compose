@@ -24,14 +24,14 @@ import java.util.Locale.getDefault
 @Composable
 fun HomeScreen(
     email: String,
-    viewModel: HomeViewModel = hiltViewModel(),
-    onNavigateToLogin: () -> Unit
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    onNavigateToLogin: () -> Unit,
 ) {
 
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        viewModel.getUserData(email)
+        homeViewModel.getUserData(email)
     }
 
     Scaffold { innerPadding ->
@@ -88,7 +88,12 @@ fun HomeScreen(
                 onClick = { }
             )
             Spacer(Modifier.height(20.dp))
-            PrimaryIconButton(text = "Log out", onClick = { onNavigateToLogin() })
+            PrimaryIconButton(
+                text = "Log out",
+                onClick = {
+                    onNavigateToLogin()
+                    homeViewModel.logOut()
+                })
         }
     }
 }

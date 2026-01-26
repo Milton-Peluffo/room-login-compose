@@ -3,6 +3,7 @@ package com.tomildev.room_login_compose.features.auth.presentation.login
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tomildev.room_login_compose.core.data.session.SessionManager
 import com.tomildev.room_login_compose.features.auth.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -14,7 +15,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
+    private val sessionManager: SessionManager
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
@@ -62,6 +66,7 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
             result.onSuccess { user ->
                 if (user != null && user.password == _uiState.value.password) {
                     delay(2500)
+                    sessionManager.saveSession(user.email)
                     _uiState.update { it.copy(isLoginSuccess = true) }
                 } else {
                     _uiState.update {

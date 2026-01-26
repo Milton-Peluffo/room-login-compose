@@ -102,7 +102,7 @@ class RegisterViewmodel @Inject constructor(private val authRepository: AuthRepo
                 delay(2500)
                 currentState.copy(isRegistrationSuccess = true)
             }
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoading = false) }
         }
     }
 

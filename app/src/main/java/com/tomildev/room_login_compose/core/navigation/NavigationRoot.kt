@@ -11,12 +11,13 @@ import com.tomildev.room_login_compose.features.home.HomeScreen
 
 @Composable
 fun NavigationRoot(
-    navController: NavHostController
+    navController: NavHostController,
+    startDestination: Any = NavRoute.Login
 ) {
 
     NavHost(
         navController = navController,
-        startDestination = NavRoute.Login
+        startDestination = startDestination
     ) {
 
         composable<NavRoute.Login> {
