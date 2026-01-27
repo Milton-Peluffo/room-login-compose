@@ -16,7 +16,8 @@ import androidx.compose.ui.unit.sp
 fun AuthTextAction(
     modifier: Modifier = Modifier,
     text: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    textAlign: TextAlign
 ) {
     Text(
         modifier = modifier
@@ -28,7 +29,7 @@ fun AuthTextAction(
         text = text,
         fontSize = 15.sp,
         fontWeight = FontWeight.ExtraBold,
-        textAlign = TextAlign.Center,
+        textAlign = textAlign,
         color = MaterialTheme.colorScheme.onBackground
     )
 }

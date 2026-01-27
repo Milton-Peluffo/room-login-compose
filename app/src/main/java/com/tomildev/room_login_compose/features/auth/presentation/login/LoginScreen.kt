@@ -12,12 +12,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tomildev.room_login_compose.core.presentation.components.OutlinedPrimaryButton
 import com.tomildev.room_login_compose.features.auth.presentation.components.AuthTextAction
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryButton
+import com.tomildev.room_login_compose.core.presentation.components.PrimarySubtitle
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryTextField
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryTitle
 import com.tomildev.room_login_compose.core.presentation.components.TextError
@@ -52,17 +54,27 @@ fun LoginScreen(
                 title = "WELCOME BACK!",
                 subtitle = "Log in to continue"
             )
+            PrimarySubtitle(text = "Email")
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.email,
                 onValueChange = { loginViewModel.onEmailChange(email = it) },
-                label = "Email"
+                label = "Email",
+                isError = uiState.isEmailError
             )
+            PrimarySubtitle(text = "Password")
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.password,
                 onValueChange = { loginViewModel.onPasswordChange(password = it) },
-                label = "Password"
+                label = "Password",
+                isError = uiState.isPasswordError
+            )
+            Spacer(Modifier.height(5.dp))
+            AuthTextAction(
+                text = "Forget Password?",
+                onClick = { },
+                textAlign = TextAlign.End
             )
             uiState.errorMessage?.let { error ->
                 TextError(text = error)
@@ -77,11 +89,6 @@ fun LoginScreen(
             OutlinedPrimaryButton(
                 text = "Create an account",
                 onClick = { onNavigateToRegister() })
-            Spacer(Modifier.height(20.dp))
-            AuthTextAction(
-                text = "I forgot my password",
-                onClick = { }
-            )
         }
     }
 }

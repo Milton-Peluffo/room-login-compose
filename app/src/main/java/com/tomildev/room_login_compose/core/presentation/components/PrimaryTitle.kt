@@ -39,16 +39,17 @@ fun PrimaryTitle(
         }
 
         if (subtitle != null) {
-            Spacer(modifier = Modifier.height(70.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             Text(
+                modifier = Modifier.fillMaxWidth(),
                 text = subtitle,
-                fontSize = 20.sp,
+                fontSize = 17.sp,
                 fontWeight = FontWeight.ExtraBold,
-                textAlign = TextAlign.Start,
-                color = MaterialTheme.colorScheme.onBackground
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
             )
         }
-        Spacer(Modifier.height(5.dp))
+        Spacer(Modifier.height(60.dp))
     }
 }

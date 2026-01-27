@@ -12,13 +12,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryButton
+import com.tomildev.room_login_compose.core.presentation.components.PrimarySubtitle
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryTextField
 import com.tomildev.room_login_compose.core.presentation.components.PrimaryTitle
 import com.tomildev.room_login_compose.core.presentation.components.TextError
+import com.tomildev.room_login_compose.features.auth.presentation.components.AuthCheckBox
 import com.tomildev.room_login_compose.features.auth.presentation.components.AuthTextAction
 
 @Composable
@@ -51,6 +54,7 @@ fun RegisterScreen(
                 title = "HEY THERE!",
                 subtitle = "Create your account"
             )
+            PrimarySubtitle(text = "Fill fields below to get started")
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.name,
@@ -89,16 +93,22 @@ fun RegisterScreen(
             uiState.errorMessage?.let { error ->
                 TextError(text = error)
             }
-            Spacer(Modifier.height(20.dp))
+            AuthCheckBox(
+                checked = uiState.isCheckBoxChecked,
+                onCheckedChange = { registerViewmodel.onCheckedChange(isCheckBoxChecked = it) },
+                text = "I agree to Terms and Privacy Policy "
+            )
+            Spacer(Modifier.height(10.dp))
             PrimaryButton(
-                text = "Sign up",
+                text = "Sign Up",
                 isLoading = uiState.isLoading,
                 onClick = { registerViewmodel.onRegisterClick() }
             )
             Spacer(Modifier.height(20.dp))
             AuthTextAction(
-                text = "I already have an account",
-                onClick = { onNavigateToLogin() }
+                text = "Already Have Account? Log In",
+                onClick = { onNavigateToLogin() },
+                textAlign = TextAlign.Center
             )
         }
     }

@@ -156,6 +156,12 @@ class RegisterViewmodel @Inject constructor(private val authRepository: AuthRepo
         }
     }
 
+    fun onCheckedChange(isCheckBoxChecked: Boolean){
+        _uiState.update { currentState ->
+            currentState.copy(isCheckBoxChecked = isCheckBoxChecked)
+        }
+    }
+
     private fun isEmailValid(email: String): Boolean =
         Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
@@ -178,6 +184,7 @@ data class RegisterUiState(
     val isRegistered: Boolean = false,
     val isRegistrationSuccess: Boolean = false,
     val isLoading: Boolean = false,
+    val isCheckBoxChecked: Boolean = false,
     //ERRORS
     val errorMessage: String? = null,
     val isNameError: Boolean = false,
