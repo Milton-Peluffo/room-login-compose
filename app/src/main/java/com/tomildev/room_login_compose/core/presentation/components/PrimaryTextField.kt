@@ -44,5 +44,4 @@ fun PrimaryTextField(
             errorTextColor = MaterialTheme.colorScheme.error
         )
     )
-    Spacer(Modifier.height(5.dp))
 }

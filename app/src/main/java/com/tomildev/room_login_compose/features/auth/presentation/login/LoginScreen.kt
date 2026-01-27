@@ -62,6 +62,7 @@ fun LoginScreen(
                 label = "Email",
                 isError = uiState.isEmailError
             )
+            Spacer(Modifier.height(5.dp))
             PrimarySubtitle(text = "Password")
             PrimaryTextField(
                 modifier = Modifier,
@@ -70,7 +71,7 @@ fun LoginScreen(
                 label = "Password",
                 isError = uiState.isPasswordError
             )
-            Spacer(Modifier.height(5.dp))
+            Spacer(Modifier.height(10.dp))
             AuthTextAction(
                 text = "Forget Password?",
                 onClick = { },
@@ -79,7 +80,7 @@ fun LoginScreen(
             uiState.errorMessage?.let { error ->
                 TextError(text = error)
             }
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(30.dp))
             PrimaryButton(
                 text = "Login",
                 isLoading = uiState.isLoading,

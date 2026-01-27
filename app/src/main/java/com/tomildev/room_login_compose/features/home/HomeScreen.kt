@@ -61,24 +61,28 @@ fun HomeScreen(
                 onValueChange = { },
                 label = "Name",
             )
+            Spacer(Modifier.height(5.dp))
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.phone,
                 onValueChange = { },
                 label = "Phone",
             )
+            Spacer(Modifier.height(5.dp))
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.email,
                 onValueChange = { },
                 label = "Email",
             )
+            Spacer(Modifier.height(5.dp))
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.password,
                 onValueChange = { },
                 label = "Password",
             )
+            Spacer(Modifier.height(5.dp))
             PrimaryTextField(
                 modifier = Modifier,
                 value = "",

@@ -62,6 +62,7 @@ fun RegisterScreen(
                 label = "Name",
                 isError = uiState.isNameError
             )
+            Spacer(Modifier.height(5.dp))
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.phone,
@@ -69,6 +70,7 @@ fun RegisterScreen(
                 label = "Phone",
                 isError = uiState.isPhoneError
             )
+            Spacer(Modifier.height(5.dp))
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.email,
@@ -76,6 +78,7 @@ fun RegisterScreen(
                 label = "Email",
                 isError = uiState.isEmailError
             )
+            Spacer(Modifier.height(5.dp))
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.password,
@@ -83,6 +86,7 @@ fun RegisterScreen(
                 label = "Password",
                 isError = uiState.isPasswordError
             )
+            Spacer(Modifier.height(5.dp))
             PrimaryTextField(
                 modifier = Modifier,
                 value = uiState.confirmPassword,
@@ -90,15 +94,16 @@ fun RegisterScreen(
                 label = "Confirm password",
                 isError = uiState.isPasswordConfirmError
             )
-            uiState.errorMessage?.let { error ->
-                TextError(text = error)
-            }
+            Spacer(Modifier.height(5.dp))
             AuthCheckBox(
                 checked = uiState.isCheckBoxChecked,
                 onCheckedChange = { registerViewmodel.onCheckedChange(isCheckBoxChecked = it) },
                 text = "I agree to Terms and Privacy Policy "
             )
-            Spacer(Modifier.height(10.dp))
+            uiState.errorMessage?.let { error ->
+                TextError(text = error)
+            }
+            Spacer(Modifier.height(25.dp))
             PrimaryButton(
                 text = "Sign Up",
                 isLoading = uiState.isLoading,
