@@ -69,7 +69,8 @@ fun LoginScreen(
                 value = uiState.password,
                 onValueChange = { loginViewModel.onPasswordChange(password = it) },
                 label = "Password",
-                isError = uiState.isPasswordError
+                isError = uiState.isPasswordError,
+                isPasswordField = true
             )
             Spacer(Modifier.height(10.dp))
             AuthTextAction(

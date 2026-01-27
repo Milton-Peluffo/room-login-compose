@@ -81,6 +81,7 @@ fun HomeScreen(
                 value = uiState.password,
                 onValueChange = { },
                 label = "Password",
+                isPasswordField = true
             )
             Spacer(Modifier.height(5.dp))
             PrimaryTextField(
@@ -88,6 +89,7 @@ fun HomeScreen(
                 value = "",
                 onValueChange = { },
                 label = "Confirm password",
+                isPasswordField = true
             )
 //            uiState.errorMessage?.let { error ->
 //                TextError(text = error)

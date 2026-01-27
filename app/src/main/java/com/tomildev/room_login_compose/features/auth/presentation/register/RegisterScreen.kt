@@ -84,7 +84,8 @@ fun RegisterScreen(
                 value = uiState.password,
                 onValueChange = { registerViewmodel.onPasswordChange(password = it) },
                 label = "Password",
-                isError = uiState.isPasswordError
+                isError = uiState.isPasswordError,
+                isPasswordField = true
             )
             Spacer(Modifier.height(5.dp))
             PrimaryTextField(
@@ -92,7 +93,8 @@ fun RegisterScreen(
                 value = uiState.confirmPassword,
                 onValueChange = { registerViewmodel.onConfirmPasswordChange(confirmPassword = it) },
                 label = "Confirm password",
-                isError = uiState.isPasswordConfirmError
+                isError = uiState.isPasswordConfirmError,
+                isPasswordField = true
             )
             Spacer(Modifier.height(5.dp))
             AuthCheckBox(
