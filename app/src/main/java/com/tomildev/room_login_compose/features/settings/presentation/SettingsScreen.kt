@@ -81,8 +81,13 @@ fun SettingsScreen(
                         leadingIcon = com.tomildev.room_login_compose.R.drawable.ic_moon,
                         text = "Dark mode",
                         checked = true,
-                        showDivider = false,
                         onCheckedChange = {},
+                    )
+                    SettingsActionItem(
+                        leadingIcon = com.tomildev.room_login_compose.R.drawable.ic_log_out,
+                        text = "Log out",
+                        showDivider = false,
+                        onClick = {}
                     )
                 }
             )
