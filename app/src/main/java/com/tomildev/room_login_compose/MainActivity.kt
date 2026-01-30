@@ -8,7 +8,6 @@ import androidx.navigation.compose.rememberNavController
 import com.tomildev.room_login_compose.core.data.session.SessionManager
 import com.tomildev.room_login_compose.core.navigation.NavRoute
 import com.tomildev.room_login_compose.core.navigation.NavigationRoot
-import com.tomildev.room_login_compose.features.auth.presentation.login.LoginScreen
 import com.tomildev.room_login_compose.features.home.HomeScreen
 import com.tomildev.room_login_compose.features.settings.presentation.SettingsScreen
 import com.tomildev.room_login_compose.ui.theme.Room_login_composeTheme
@@ -27,19 +26,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             Room_login_composeTheme {
 
-//                val userEmail = sessionManager.getSession()
-//
-//                val startRoute = if (userEmail != null) {
-//                    NavRoute.Home(email = userEmail)
-//                } else {
-//                    NavRoute.Login
-//                }
-//
-//                val navController = rememberNavController()
-//
-//                NavigationRoot(navController = navController, startDestination = startRoute)
+                val userEmail = sessionManager.getSession()
 
-                SettingsScreen()
+                val startRoute = if (userEmail != null) {
+                    NavRoute.Home(email = userEmail)
+                } else {
+                    NavRoute.Login
+                }
+
+                val navController = rememberNavController()
+
+                NavigationRoot(navController = navController, startDestination = startRoute)
+
+//                SettingsScreen()
             }
         }
     }

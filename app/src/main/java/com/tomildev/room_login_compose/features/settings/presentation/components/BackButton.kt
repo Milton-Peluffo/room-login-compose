@@ -1,6 +1,7 @@
 package com.tomildev.room_login_compose.features.settings.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -21,7 +22,8 @@ fun BackButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
         modifier = modifier
             .clip(shape = CircleShape)
             .background(MaterialTheme.colorScheme.surfaceVariant)
-            .size(50.dp),
+            .size(50.dp)
+            .clickable(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         Icon(

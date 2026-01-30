@@ -26,7 +26,10 @@ import com.tomildev.room_login_compose.features.settings.presentation.components
 import com.tomildev.room_login_compose.features.settings.presentation.components.UserProfileHeader
 
 @Composable
-fun SettingsScreen(modifier: Modifier = Modifier) {
+fun SettingsScreen(
+    modifier: Modifier = Modifier,
+    onNavigateToHome: () -> Unit
+) {
 
     Scaffold(
         topBar = {
@@ -35,7 +38,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 ),
-                navigationIcon = { BackButton(onClick = {}) },
+                navigationIcon = { BackButton(onClick = { onNavigateToHome() }) },
                 title = {
                     SecondaryTitle(title = "Settings")
                 },

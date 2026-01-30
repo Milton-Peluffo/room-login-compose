@@ -8,6 +8,7 @@ import androidx.navigation.toRoute
 import com.tomildev.room_login_compose.features.auth.presentation.login.LoginScreen
 import com.tomildev.room_login_compose.features.auth.presentation.register.RegisterScreen
 import com.tomildev.room_login_compose.features.home.HomeScreen
+import com.tomildev.room_login_compose.features.settings.presentation.SettingsScreen
 
 @Composable
 fun NavigationRoot(
@@ -41,9 +42,23 @@ fun NavigationRoot(
 
         composable<NavRoute.Home> { backStackEntry ->
             val args = backStackEntry.toRoute<NavRoute.Home>()
-            HomeScreen(email = args.email, onNavigateToLogin = {
-                navController.navigate(NavRoute.Login)
-            })
+            HomeScreen(
+                email = args.email,
+                onNavigateToLogin = {
+                    navController.navigate(NavRoute.Login)
+                },
+                onNavigateToSettings = {
+                    navController.navigate(NavRoute.Settings)
+                }
+            )
+        }
+
+        composable<NavRoute.Settings> {
+            SettingsScreen(
+                onNavigateToHome = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
